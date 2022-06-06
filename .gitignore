@@ -1,0 +1,6 @@
+.npmrc
+package-lock.json
+node_modules
+*.zip
+./bdbuilder
+bdbuilder.dev.*

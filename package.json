@@ -1,0 +1,27 @@
+{
+    "name": "caid",
+    "version": "1.0.0",
+    "main": "./CAID/inject.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "description": "",
+    "devDependencies": {
+        "@babel/core": "^7.15.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.15.6",
+        "@babel/preset-env": "^7.15.6",
+        "@babel/runtime": "^7.15.4",
+        "@betterdiscordbuilder/bdbuilder": "^1.2.22",
+        "babel-loader": "^8.2.2",
+        "file-loader": "^6.2.0",
+        "metro-react-native-babel-preset": "^0.66.2",
+        "webpack": "^5.53.0"
+    },
+    "dependencies": {
+        "@types/node": "^17.0.40",
+        "@types/react": "^18.0.12"
+    }
+}

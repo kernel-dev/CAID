@@ -1,0 +1,29 @@
+{
+    "dependencies": {
+        "@types/node": "^17.0.40",
+        "@types/react": "^18.0.12"
+    },
+    "info" : {
+        "name": "CAID",
+        "authors": [{
+            "name": "Kernel",
+            "discord_id": "575108662457139201",
+            "github_username": "kernel-dev",
+            "twitter_username": "eboy_sleepy"
+        }],
+        "version": "1.0.0-alpha",
+        "description": "Client-side avatar injection (from URL) for BetterDiscord."
+    },
+    "changelog": [
+        { "title": "Fixed", "type": "fixed", "items": ["Initial release!"] }
+    ],
+    "build": {
+        "zlibrary": true,
+        "copy": true,
+        "production": false,
+        "scssHash": false,
+        "alias": {
+            "components": "components/Modal.tsx"
+        }
+    }
+}

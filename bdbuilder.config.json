@@ -1,0 +1,13 @@
+{
+    "build": {
+      "watch": false,
+      "folder": "./[plugin]",
+      "readme": true,
+      "filename": "[name].plugin.js",
+      "production": false
+    },
+    "paths": {
+      "bdfolder": "/Users/kernel/Library/Application Support/BetterDiscord",
+      "release_folder": "./production"
+    }
+  }
