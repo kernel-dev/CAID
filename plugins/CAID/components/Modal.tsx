@@ -33,7 +33,7 @@ export const Modal = (
                 ReactTools.createWrappedElement(
                     new Settings.Textbox(
                         "",
-                        disabled || !url ? null : (
+                        (disabled || !url) ? null : (
                             <a
                                 onClick={() => {
                                     BdApi.findModuleByProps("closeModal").closeModal(
@@ -53,9 +53,11 @@ export const Modal = (
                             clearTimeout(timeout);
                             setProps({
                                 timeout: setTimeout(
-                                    () => setProps({ url: value, disabled }),
-                                    500
-                                )
+                                    () => setProps({ url: value, disabled, timeout: null }),
+                                    1000
+                                ),
+                                url,
+                                disabled,
                             });
                         },
                         {
@@ -71,16 +73,15 @@ export const Modal = (
                     "",
                     disabled,
                     (_disabled) => {
-                        setProps({ url, disabled: _disabled });
+                        setProps({ url, disabled: _disabled, timeout });
                         settings.alter<string>("temporary", settings.get<string>("original")!);
                         settings.alter<boolean>(`${type}Disabled`, _disabled);
-                        settings.writeImageUrl(
-                            data.id,
-                            _disabled === true
-                                ? settings.get<string>("original")!
-                                : settings.get<CAID>("guilds")[data.id],
-                            false
-                        );
+                        if (!_disabled)
+                            settings.writeImageUrl(
+                                data.id,
+                                settings.get<CAID>("guilds")[data.id],
+                                false
+                            );
                         settings.writeDisableConfig(type, _disabled);
                     }
                 ).getElement()
