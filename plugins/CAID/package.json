@@ -1,8 +1,4 @@
 {
-    "dependencies": {
-        "@types/node": "^17.0.40",
-        "@types/react": "^18.0.12"
-    },
     "info" : {
         "name": "CAID",
         "authors": [{
@@ -15,7 +11,15 @@
         "description": "Client-side avatar injection (from URL) for BetterDiscord."
     },
     "changelog": [
-        { "title": "Fixed", "type": "fixed", "items": ["Initial release!"] }
+        { 
+            "title": "Fixed URL validation", 
+            "type": "fixed", 
+            "items": [
+                "Would show invalid URL even when user didn't place any input",
+                "Create accommodating forms for various scenarios",
+                "BROKEN: DM injections; needs fixing"
+            ] 
+        }
     ],
     "build": {
         "zlibrary": true,
