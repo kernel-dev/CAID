@@ -1,4 +1,4 @@
-/// <reference path="../types/main.d.ts" />
+/// <reference path="../../types/main.d.ts" />
 
 import styles from "./main.scss";
 import stylesheet from "styles";
@@ -35,9 +35,12 @@ export default class CAIDInjector extends BasePlugin {
                 return;
             }
 
-            this.patchAvatarUrl();
-            this.patchDMContextMenu();
-            this.patchGuildContextMenu();
+            setTimeout(() => { 
+                this.patchAvatarUrl();
+                // BROKEN:
+                /* this.patchDMContextMenu(); */
+                this.patchGuildContextMenu();
+            }, 1000)
         } catch (e) {
             console.error(e);
         }
@@ -75,6 +78,9 @@ export default class CAIDInjector extends BasePlugin {
                     ? window.location.href.split("/@me/")[1]
                     : window.location.href.split("/").filter((x) => x)[3];
 
+                const type = window.location.href.includes("@me") ? "dm" : "guild";
+
+                if (type && this.pluginSettings.get<boolean>(`${type}Disabled`)) return this.pluginSettings.get<string>("original");
                 if (props[0].id !== this.id) return;
 
                 return this.pluginSettings.get<CAID>("guilds")?.[locationId];
@@ -82,28 +88,40 @@ export default class CAIDInjector extends BasePlugin {
         );
     }
 
-    public patchDMContextMenu(): void {
+    // FIXME: Discord updated their frontend API;
+    //        the old DM Channel ("User") Context Menu
+    //        no longer exists under than name.
+    //
+    //        Instead, now it's a `MenuGroup` with children
+    //        of type `MenuItem` – ref: https://github.com/Strencher/BetterDiscordStuff/blob/master/Copier/Copier.plugin.js#L446-L470
+    /* public patchDMContextMenu(): void {
+        if (!window.location.href.includes("@me")) return;
+
         const findWithDefault = (filter) =>
             WebpackModules.getModule((m) => m && m?.default && filter(m.default));
 
         const DMContextMenu = findWithDefault(
-            (m) => m?.displayName === "DMUserContextMenu"
+            (m) => m?.displayName === "MenuGroup"
         );
 
-        if (!DMContextMenu) return;
-
+        if (!DMContextMenu)
+            return void setTimeout(() => {
+                this.patchDMContextMenu();
+            }, 1000)
+        
         Patcher.after(
             DMContextMenu,
             "default",
             (_, [props], ret) => {
                 const children = Utilities.getNestedProp(
                     ret,
-                    "props.children.props.children"
-                );
+                    "props.children"
+                )[1];
 
                 if (!Array.isArray(children)) return;
 
-                const { channel } = props;
+                const id = window.location.href.split("@me/")[1];
+                const channel = { id };
 
                 children.splice(
                     4,
@@ -114,25 +132,20 @@ export default class CAIDInjector extends BasePlugin {
                             BdApi.showConfirmationModal(
                                 "Change Avatar",
                                 <Modal
-
+                                    data={channel}
+                                    settings={this.pluginSettings}
+                                    type={"dm"}
                                 />,
                                 {
                                     onConfirm: () => {
                                         try {
                                             let err = null;
-                                            const value = this.pluginSettings.get<Nullable<boolean | string>>("temporary");
+                                            const value = this.pluginSettings.get<Nullable<string>>("temporary");
 
-                                            if (value && typeof value === "boolean" && (value as boolean) === false)
-                                                return this.pluginSettings.writeImageUrl(
-                                                    channel.id,
-                                                    null,
-                                                    true
-                                                );
+                                            if (!value)
+                                                return;
 
-                                            if (
-                                                value &&
-                                                value === this.pluginSettings.get<string>("original")
-                                            ) return;
+                                            if (value === this.pluginSettings.get<string>("original")) return;
 
                                             if (!Util.validateUrl(value))
                                                 return BdApi.showConfirmationModal(
@@ -143,7 +156,7 @@ export default class CAIDInjector extends BasePlugin {
 
                                             if (channel?.id && value)
                                                 err = this.pluginSettings.writeImageUrl(
-                                                    channel.id,
+                                                    id,
                                                     value as string
                                                 );
 
@@ -174,9 +187,11 @@ export default class CAIDInjector extends BasePlugin {
                 )
             }
         )
-    }
+    } */
 
     public patchGuildContextMenu(): void {
+        if (window.location.href.includes("@me")) return;
+
         const findWithDefault = (filter) =>
             WebpackModules.getModule((m) => m && m?.default && filter(m.default));
 
@@ -184,7 +199,10 @@ export default class CAIDInjector extends BasePlugin {
             (m) => m?.displayName === "GuildContextMenu"
         );
 
-        if (!GuildContextMenu) return;
+        if (!GuildContextMenu)
+            return void setTimeout(() => {
+                this.patchGuildContextMenu();
+            }, 1000);
 
         Patcher.after(
             GuildContextMenu,
@@ -209,9 +227,9 @@ export default class CAIDInjector extends BasePlugin {
                                 onConfirm: () => {
                                     try {
                                         let err = null;
-                                        const val = this.pluginSettings.get("temporary");
+                                        const val = this.pluginSettings.get<Nullable<string>>("temporary");
 
-                                        if (typeof val === "boolean" && val === false)
+                                        if (!val)
                                             return this.pluginSettings.writeImageUrl(
                                                 guild.id,
                                                 null,
@@ -221,11 +239,7 @@ export default class CAIDInjector extends BasePlugin {
                                         if (val && val === this.pluginSettings.get("original"))
                                             return;
 
-                                        if (
-                                            !val ||
-                                            (val?.length &&
-                                                !val.match(/\.(jpg|jpeg|png|webp|svg|gif)/gi)?.length)
-                                        )
+                                        if (!Util.validateUrl(val))
                                             return BdApi.showConfirmationModal(
                                                 "INVALID",
                                                 "Please specify a valid URL!",
@@ -233,7 +247,7 @@ export default class CAIDInjector extends BasePlugin {
                                             );
 
                                         if (guild?.id && val)
-                                            err = this.pluginSettings.writeImageUrl(guild.id, val);
+                                            err = this.pluginSettings.writeImageUrl(guild.id, val as string);
 
                                         if (err) return console.error(err);
 
