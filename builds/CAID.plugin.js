@@ -28,10 +28,6 @@
 @else@*/
 /* Generated Code */
 const config = {
-	"dependencies": {
-		"@types/node": "^17.0.40",
-		"@types/react": "^18.0.12"
-	},
 	"info": {
 		"name": "CAID",
 		"authors": [{
@@ -44,10 +40,12 @@ const config = {
 		"description": "Client-side avatar injection (from URL) for BetterDiscord."
 	},
 	"changelog": [{
-		"title": "Fixed",
+		"title": "Fixed URL validation",
 		"type": "fixed",
 		"items": [
-			"Initial release!"
+			"Would show invalid URL even when user didn't place any input",
+			"Create accommodating forms for various scenarios",
+			"BROKEN: DM injections; needs fixing"
 		]
 	}],
 	"build": {
@@ -64,8 +62,8 @@ function buildPlugin([BasePlugin, PluginApi]) {
 	const module = {
 		exports: {}
 	};
-	/*! For license information please see index.js.LICENSE.txt */
 	(() => {
+		"use strict";
 		class StyleLoader {
 			static styles = "";
 			static element = null;
@@ -272,60 +270,58 @@ function buildPlugin([BasePlugin, PluginApi]) {
 			}
 		};
 		var __webpack_modules__ = {
-			"./plugins/CAID/main.scss": (module, __webpack_exports__, __webpack_require__) => {
-				"use strict";
-				eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _usr_local_lib_node_modules_betterdiscordbuilder_bdbuilder_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../../usr/local/lib/node_modules/@betterdiscordbuilder/bdbuilder/node_modules/css-loader/dist/runtime/api.js */ "../../../../usr/local/lib/node_modules/@betterdiscordbuilder/bdbuilder/node_modules/css-loader/dist/runtime/api.js");\n/* harmony import */ var _usr_local_lib_node_modules_betterdiscordbuilder_bdbuilder_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_usr_local_lib_node_modules_betterdiscordbuilder_bdbuilder_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);\n// Imports\n\nvar ___CSS_LOADER_EXPORT___ = _usr_local_lib_node_modules_betterdiscordbuilder_bdbuilder_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});\n// Module\n___CSS_LOADER_EXPORT___.push([module.id, ".CAID-main-AvatarImg {\\n  width: 40%;\\n  height: 40%;\\n  object-fit: cover;\\n  display: block;\\n  margin-left: auto;\\n  margin-right: auto;\\n}\\n\\n.CAID-main-successAvatarImg {\\n  display: block;\\n  line-height: normal;\\n}\\n\\nimg[class*=avatar-][class*=clickable-] {\\n  width: 40px;\\n  height: 40px;\\n  object-fit: cover;\\n}\\n\\na[class*=reset-avatar] {\\n  margin-top: 5px !important;\\n  display: inline-block !important;\\n  text-decoration: none !important;\\n}\\n\\na[class*=reset-avatar]::after {\\n  background: none repeat scroll 0 0 transparent !important;\\n  bottom: 0 !important;\\n  content: \\"\\" !important;\\n  width: 0px !important;\\n  height: 1px !important;\\n  left: 25% !important;\\n  display: block !important;\\n  background: #00aff4 !important;\\n  text-decoration: underline !important;\\n  transition: width 0.3s ease 0s, left 0.3s ease 0s !important;\\n  width: 0 !important;\\n}\\n\\na[class*=reset-avatar]:hover::after {\\n  width: 100% !important;\\n  left: 0 !important;\\n}", ""]);\n// Exports\n___CSS_LOADER_EXPORT___.locals = {\n\t"AvatarImg": "CAID-main-AvatarImg",\n\t"successAvatarImg": "CAID-main-successAvatarImg"\n};\nStyleLoader.append(module.id, ___CSS_LOADER_EXPORT___.toString())\n;\n\t/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Object.assign(___CSS_LOADER_EXPORT___, ___CSS_LOADER_EXPORT___.locals));\n\n\n//# sourceURL=webpack://LibraryPluginHack/./plugins/CAID/main.scss?');
+			666: (module, __webpack_exports__, __webpack_require__) => {
+				__webpack_require__.d(__webpack_exports__, {
+					Z: () => __WEBPACK_DEFAULT_EXPORT__
+				});
+				var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(645);
+				var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = __webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+				var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()((function(i) {
+					return i[1];
+				}));
+				___CSS_LOADER_EXPORT___.push([module.id, '.CAID-main-AvatarImg{width:40%;height:40%;object-fit:cover;display:block;margin-left:auto;margin-right:auto}.CAID-main-successAvatarImg{display:block;line-height:normal}.CAID-main-InvalidUrl{color:#f66 !important}img[class*=avatar-][class*=clickable-]{width:40px;height:40px;object-fit:cover}a[class*=reset-avatar]{margin-top:5px !important;display:inline-block !important;text-decoration:none !important}a[class*=reset-avatar]::after{background:none repeat scroll 0 0 rgba(0,0,0,0) !important;bottom:0 !important;content:"" !important;width:0px !important;height:1px !important;left:25% !important;display:block !important;background:#00aff4 !important;text-decoration:underline !important;transition:width .3s ease 0s,left .3s ease 0s !important;width:0 !important}a[class*=reset-avatar]:hover::after{width:100% !important;left:0 !important}', ""]);
+				___CSS_LOADER_EXPORT___.locals = {
+					AvatarImg: "CAID-main-AvatarImg",
+					successAvatarImg: "CAID-main-successAvatarImg",
+					InvalidUrl: "CAID-main-InvalidUrl"
+				};
+				StyleLoader.append(module.id, ___CSS_LOADER_EXPORT___.toString());
+				const __WEBPACK_DEFAULT_EXPORT__ = Object.assign(___CSS_LOADER_EXPORT___, ___CSS_LOADER_EXPORT___.locals);
 			},
-			"./plugins/CAID/Settings.ts": (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-				"use strict";
-				eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "Settings": () => (/* binding */ Settings)\n/* harmony export */ });\n/* harmony import */ var _discord_stores__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @discord/stores */ "@discord/stores");\n/* harmony import */ var _discord_stores__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_discord_stores__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! betterdiscord/api */ "betterdiscord/api");\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(betterdiscord_api__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");\n/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! fs */ "fs");\n/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_3__);\n function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === \'optionalAccess\' || op === \'optionalCall\') && value == null) { return undefined; } if (op === \'access\' || op === \'optionalAccess\') { lastAccessLHS = value; value = fn(value); } else if (op === \'call\' || op === \'optionalCall\') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }\n\n\n\n\nclass Settings {\n    \n    \n     constructor() { \n        this.settings = {};\n\t\tthis.set();\n\t\tthis.load();\n    }\n\n     alter(\n\t\tproperty, \n\t\tvalue = null, \n\t\tsubValue = null\n\t) {\n        if (value == null)\n            return;\n\n        if (!this.isPresent(property, subValue))    \n            subValue != null\n                ? this.settings[property][subValue] = value\n                : this.settings[property] = value\n    }\n\n     get(\n\t\tproperty, \n\t\tsubValue = null\n\t) {\n        try {\n            return (\n                subValue != null\n                    ? this.settings[property][subValue]\n                    : this.settings[property]\n            )\n        } catch (e2) { return null; }\n    }\n\n\t/**\n\t * Returns an error, or nothing if it successfully updated.\n\t */\n\t writeImageUrl(\n\t\tid,\n\t\timageUrl,\n\t\tdeleteEntry = false\n\t) {\n\t\tif (!id) return new Error("\'id\' value not provided!");\n\n\t\ttry {\n\t\t\tif (!Object.keys(this.get("guilds")).length)\n\t\t\t\tthis.alter(\n\t\t\t\t\t"guilds",\n\t\t\t\t\t{}\n\t\t\t\t);\n\n\t\t\tif ((this.get("guilds")[id] && deleteEntry) || imageUrl == null) {\n\t\t\t\tdelete this.get("guilds")[id];\n\n\t\t\t\tthis.alter("guilds", (this.get("guilds") || {}) );\n\n\t\t\t\treturn (0,fs__WEBPACK_IMPORTED_MODULE_3__.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));\n\t\t\t}\n\n\t\t\tObject.keys(this.get("guilds") || {}).length\n\t\t\t\t? this.alter("guilds", imageUrl, id)\n\t\t\t\t: this.alter("guilds", { [id]: imageUrl })\n\n\t\t\t;(0,fs__WEBPACK_IMPORTED_MODULE_3__.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));\n\t\t} catch (e) { return e; }\n\t}\n\n\t writeDisableConfig(\n\t\ttype,\n\t\tdisabled\n\t) {\n\t\tif (\n\t\t\t!type ||\n\t\t\ttypeof type != "string" ||\n\t\t\t!["guild", "dm"].some((t) => type.toLowerCase() == t)\n\t\t)\n\t\t\treturn console.error(\n\t\t\t\t"[CAID_CONFIG]: Invalid value for \'disabled\'! Must be \'guild\' or \'dm\'!"\n\t\t\t);\n\t\t\n\t\tthis.alter(`${type}Disabled`, disabled);\n\n\t\t(0,fs__WEBPACK_IMPORTED_MODULE_3__.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));\n\t}\n\n\t findConfig(pluginsPath = (betterdiscord_api__WEBPACK_IMPORTED_MODULE_1___default().Plugins.folder)) {\n\t\tlet found = null;\n\n\t\ttry {\n\t\t\tconst results = (0,fs__WEBPACK_IMPORTED_MODULE_3__.readdirSync)(pluginsPath);\n\n\t\t\tfor (const result of results) {\n\t\t\t\tif (found != null) break;\n\n\t\t\t\tconst stat = (0,fs__WEBPACK_IMPORTED_MODULE_3__.statSync)(path__WEBPACK_IMPORTED_MODULE_2__.join(pluginsPath, result));\n\n\t\t\t\tif (stat.isDirectory()){\n\t\t\t\t\tthis.findConfig(path__WEBPACK_IMPORTED_MODULE_2__.join(pluginsPath, result));\n\t\t\t\t\tcontinue;\n\t\t\t\t} else {\n\t\t\t\t\tif (_optionalChain([result, \'access\', _ => _.match, \'call\', _2 => _2(/caid\\s?\\.config\\s?\\.json/gi), \'optionalAccess\', _3 => _3.length]))\n\t\t\t\t\t\tfound = path__WEBPACK_IMPORTED_MODULE_2__.join(pluginsPath, result);\n\t\t\t\t}\n\t\t\t}\n\t\t} catch (e3) {\n\t\t\tconsole.error("Unable to find configuration file.");\n\t\t}\n\n\t\treturn found;\n\t}\n\n\t load() {\n\t\tconst home = (betterdiscord_api__WEBPACK_IMPORTED_MODULE_1___default().Plugins.folder) ;\n\n\t\tthis.alter("path", this.findConfig(home));\n\n\t\tif (this.get("path") == null) return;\n\t\t\n\t\tdelete window.require.cache[window.require.resolve(this.get("path"))];\n\t\tthis.alter("guilds", this.get("guilds") || {});\n\n\t\tconst watcher = (0,fs__WEBPACK_IMPORTED_MODULE_3__.watch)(this.get("path"))\n\n\t\twatcher.on("change", () => {\n\t\t\tthis.alter("guilds", {} )\n\t\t\tdelete window.require.cache[window.require.resolve(this.get("path"))];\n\n\t\t\tconst options = window.require(this.get("path")) ;\n\n\t\t\tthis.alter("guilds", _optionalChain([options, \'optionalAccess\', _4 => _4.guilds]) || {});\n\t\t\tthis.alter("guildDisabled", _optionalChain([options, \'optionalAccess\', _5 => _5.guildDisabled]) || false);\n\t\t\tthis.alter("dmDisabled", _optionalChain([options, \'optionalAccess\', _6 => _6.dmDisabled]) || false);\n\t\t});\n\n\t\tconst data = window.require(this.get("path")) ;\n\n\t\tthis.alter("guildDisabled", data.guildDisabled);\n\t\tthis.alter("dmDisabled", data.dmDisabled);\n\t\tthis.alter("guilds", data.guilds);\n\t}\n\n\t set() {\n\t\tthis.alter("path", this.findConfig());\n\t\tthis.alter("original", _discord_stores__WEBPACK_IMPORTED_MODULE_0__.Users.getCurrentUser().getAvatarURL());\n\t\tthis.load();\n\t}\n\n     isPresent(\n\t\tproperty, \n\t\tsubValue = null\n\t) {\n        for (const entry in this.settings) {\n            try {\n                return Boolean(\n                    subValue != null \n                        ? _optionalChain([entry, \'optionalAccess\', _7 => _7[property], \'optionalAccess\', _8 => _8[subValue]]) \n                        : _optionalChain([entry, \'optionalAccess\', _9 => _9[property]])\n                )\n            } catch (e4) {}\n        }\n\n\t\treturn false;\n    }\n}\n\n//# sourceURL=webpack://LibraryPluginHack/./plugins/CAID/Settings.ts?');
+			645: module => {
+				module.exports = function(cssWithMappingToString) {
+					var list = [];
+					list.toString = function toString() {
+						return this.map((function(item) {
+							var content = cssWithMappingToString(item);
+							if (item[2]) return "@media ".concat(item[2], " {").concat(content, "}");
+							return content;
+						})).join("");
+					};
+					list.i = function(modules, mediaQuery, dedupe) {
+						if ("string" === typeof modules) modules = [
+							[null, modules, ""]
+						];
+						var alreadyImportedModules = {};
+						if (dedupe)
+							for (var i = 0; i < this.length; i++) {
+								var id = this[i][0];
+								if (null != id) alreadyImportedModules[id] = true;
+							}
+						for (var _i = 0; _i < modules.length; _i++) {
+							var item = [].concat(modules[_i]);
+							if (dedupe && alreadyImportedModules[item[0]]) continue;
+							if (mediaQuery)
+								if (!item[2]) item[2] = mediaQuery;
+								else item[2] = "".concat(mediaQuery, " and ").concat(item[2]);
+							list.push(item);
+						}
+					};
+					return list;
+				};
 			},
-			"./plugins/CAID/Util.ts": () => {
-				eval(" function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === 'optionalAccess' || op === 'optionalCall') && value == null) { return undefined; } if (op === 'access' || op === 'optionalAccess') { lastAccessLHS = value; value = fn(value); } else if (op === 'call' || op === 'optionalCall') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; } class Util {\n     validateUrl(imageUrl) {\n        return (\n            imageUrl &&\n            typeof imageUrl === \"string\" &&\n            !_optionalChain([imageUrl, 'access', _ => _.match, 'call', _2 => _2(/\\.(jpg|jpeg|png|webp|svg|gif)/gi), 'optionalAccess', _3 => _3.length])\n        );\n    }\n}\n\n//# sourceURL=webpack://LibraryPluginHack/./plugins/CAID/Util.ts?");
-			},
-			"./plugins/CAID/components/Modal.tsx": (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-				"use strict";
-				eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "Modal": () => (/* binding */ Modal)\n/* harmony export */ });\n/* harmony import */ var _zlibrary__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @zlibrary */ "@zlibrary");\n/* harmony import */ var _zlibrary__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_zlibrary__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Settings */ "./plugins/CAID/Settings.ts");\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! betterdiscord/api */ "betterdiscord/api");\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(betterdiscord_api__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../main.scss */ "./plugins/CAID/main.scss");\n/* provided dependency */ var React = __webpack_require__(/*! react */ "react");\n\n\n\n\n\nconst Modal = (\n    { data, type, settings }\n\n) => {\n    if (!(settings instanceof _Settings__WEBPACK_IMPORTED_MODULE_1__.Settings))\n        return console.error(\n            new Error("\'settings\' property must of type \'PluginSettings\'!")\n        );\n\n    if (!["dm", "guild"].some((t) => type.toLowerCase() == t))\n        return console.error(\n            "\'type\' property must be either \'guild\' or \'dm\'!" // This should never happen.\n        );\n\n    const dmDisabled = settings.get("dmDisabled");\n    const guildDisabled = settings.get("guildDisabled");\n\n    const [{ url, disabled, timeout }, setProps] = React.useState({\n        url: "",\n        disabled: type && type.toLowerCase() === "dm" ? dmDisabled : guildDisabled,\n        timeout: null\n    });\n\n    return (\n        React.createElement(\'div\', {\n            className: "AvatarPanel",\n            children: [\n                _zlibrary__WEBPACK_IMPORTED_MODULE_0__.ReactTools.createWrappedElement(\n                    new _zlibrary__WEBPACK_IMPORTED_MODULE_0__.Settings.Textbox(\n                        "",\n                        disabled || !url ? null : (\n                            React.createElement(\'a\', {\n                                onClick: () => {\n                                    betterdiscord_api__WEBPACK_IMPORTED_MODULE_2___default().findModuleByProps("closeModal").closeModal(\n                                        settings.get(`${type}Disabled`)\n                                    );\n\n                                    return settings.writeImageUrl(data.id, null, true);\n                                },\n                                className: "reset-avatar",}\n                            , "Reset Avatar"\n\n                            )\n                        ),\n                        url,\n                        (value) => {\n                            settings.alter("temporary", value);\n                            clearTimeout(timeout);\n                            setProps({\n                                timeout: setTimeout(\n                                    () => setProps({ url: value, disabled }),\n                                    500\n                                )\n                            });\n                        },\n                        {\n                            placeholder: "Enter URL",\n                            disabled\n                        }\n                    ).getElement()\n                ),\n            !url ? null : React.createElement(\'img\', { src: url, className: _main_scss__WEBPACK_IMPORTED_MODULE_3__["default"].AvatarImg,} ),\n            url ? null : _zlibrary__WEBPACK_IMPORTED_MODULE_0__.ReactTools.createWrappedElement(\n                new _zlibrary__WEBPACK_IMPORTED_MODULE_0__.Settings.Switch(\n                    "Disabled",\n                    "",\n                    disabled,\n                    (_disabled) => {\n                        setProps({ url, disabled: _disabled });\n                        settings.alter("temporary", settings.get("original"));\n                        settings.alter(`${type}Disabled`, _disabled);\n                        settings.writeImageUrl(\n                            data.id,\n                            _disabled === true\n                                ? settings.get("original")\n                                : settings.get("guilds")[data.id],\n                            false\n                        );\n                        settings.writeDisableConfig(type, _disabled);\n                    }\n                ).getElement()\n            )\n            ],}\n        )\n    )\n}\n\n//# sourceURL=webpack://LibraryPluginHack/./plugins/CAID/components/Modal.tsx?');
-			},
-			"./plugins/CAID/index.tsx": (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-				"use strict";
-				eval('__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   "default": () => (/* binding */ CAIDInjector)\n/* harmony export */ });\n/* harmony import */ var _main_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.scss */ "./plugins/CAID/main.scss");\n/* harmony import */ var styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styles */ "styles");\n/* harmony import */ var styles__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styles__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _zlibrary_plugin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @zlibrary/plugin */ "@zlibrary/plugin");\n/* harmony import */ var _zlibrary_plugin__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_zlibrary_plugin__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _discord_stores__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @discord/stores */ "@discord/stores");\n/* harmony import */ var _discord_stores__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_discord_stores__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _zlibrary__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @zlibrary */ "@zlibrary");\n/* harmony import */ var _zlibrary__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_zlibrary__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! betterdiscord/api */ "betterdiscord/api");\n/* harmony import */ var betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(betterdiscord_api__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var _components_Modal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Modal */ "./plugins/CAID/components/Modal.tsx");\n/* harmony import */ var _Settings__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Settings */ "./plugins/CAID/Settings.ts");\n/* harmony import */ var _Util__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Util */ "./plugins/CAID/Util.ts");\n/* harmony import */ var _Util__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Util__WEBPACK_IMPORTED_MODULE_8__);\n/* provided dependency */ var React = __webpack_require__(/*! react */ "react");\n function _optionalChain(ops) { let lastAccessLHS = undefined; let value = ops[0]; let i = 1; while (i < ops.length) { const op = ops[i]; const fn = ops[i + 1]; i += 2; if ((op === \'optionalAccess\' || op === \'optionalCall\') && value == null) { return undefined; } if (op === \'access\' || op === \'optionalAccess\') { lastAccessLHS = value; value = fn(value); } else if (op === \'call\' || op === \'optionalCall\') { value = fn((...args) => value.call(lastAccessLHS, ...args)); lastAccessLHS = undefined; } } return value; }/// <reference path="../types/main.d.ts" />\n\n\n\n\n\n\n\n\n\n\n\nclass CAIDInjector extends (_zlibrary_plugin__WEBPACK_IMPORTED_MODULE_2___default()) {\n    \n    \n    \n    \n\n     async onStart() {\n        this.guilds = {};\n        styles__WEBPACK_IMPORTED_MODULE_1___default().inject();\n\n        try {\n            this.pluginSettings = new _Settings__WEBPACK_IMPORTED_MODULE_7__.Settings();\n            this.settings = this.pluginSettings.settings ;\n            this.id = _discord_stores__WEBPACK_IMPORTED_MODULE_3__.Users.getCurrentUser().id;\n\n            if (!this.id) {\n                console.error("[CAID]: Unable to fetch current user ID, this should not happen.\\nEXITING.");\n                return;\n            }\n\n            this.patchAvatarUrl();\n            this.patchDMContextMenu();\n            this.patchGuildContextMenu();\n        } catch (e) {\n            console.error(e);\n        }\n    }\n\n     onStop() {\n        return this.stop();\n    }\n\n     stop() {\n        console.log("[CAID]: Exiting...");\n\n        styles__WEBPACK_IMPORTED_MODULE_1___default().remove();\n        _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Patcher.unpatchAll();\n        betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().saveData("CAID", "temporary", null);\n\n        console.log("[CAID]: Successfully exited.");\n    }\n\n     onSwitch() {\n        this.pluginSettings.alter(\n            "guilds",\n            this.pluginSettings.get("guilds") || {}\n        );\n    }\n\n     patchAvatarUrl() {\n        const Avatar = betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().findModuleByProps("getUserAvatarURL");\n\n        _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Patcher.after(\n            Avatar.default,\n            "getUserAvatarURL",\n            (_this, props, ret) => {\n                const locationId = window.location.href.includes("@me")\n                    ? window.location.href.split("/@me/")[1]\n                    : window.location.href.split("/").filter((x) => x)[3];\n\n                if (props[0].id !== this.id) return;\n\n                return _optionalChain([this, \'access\', _2 => _2.pluginSettings, \'access\', _3 => _3.get, \'call\', _4 => _4("guilds"), \'optionalAccess\', _5 => _5[locationId]]);\n            }\n        );\n    }\n\n     patchDMContextMenu() {\n        const findWithDefault = (filter) =>\n            _zlibrary__WEBPACK_IMPORTED_MODULE_4__.WebpackModules.getModule((m) => m && _optionalChain([m, \'optionalAccess\', _6 => _6.default]) && filter(m.default));\n\n        const DMContextMenu = findWithDefault(\n            (m) => _optionalChain([m, \'optionalAccess\', _7 => _7.displayName]) === "DMUserContextMenu"\n        );\n\n        if (!DMContextMenu) return;\n\n        _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Patcher.after(\n            DMContextMenu,\n            "default",\n            (_, [props], ret) => {\n                const children = _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Utilities.getNestedProp(\n                    ret,\n                    "props.children.props.children"\n                );\n\n                if (!Array.isArray(children)) return;\n\n                const { channel } = props;\n\n                children.splice(\n                    4,\n                    0,\n                    _zlibrary__WEBPACK_IMPORTED_MODULE_4__.ContextMenu.buildMenuItem({\n                        label: "Set Avatar URL",\n                        action: () => {\n                            betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                                "Change Avatar",\n                                React.createElement(_components_Modal__WEBPACK_IMPORTED_MODULE_6__.Modal, null\n\n                                ),\n                                {\n                                    onConfirm: () => {\n                                        try {\n                                            let err = null;\n                                            const value = this.pluginSettings.get("temporary");\n\n                                            if (value && typeof value === "boolean" && (value ) === false)\n                                                return this.pluginSettings.writeImageUrl(\n                                                    channel.id,\n                                                    null,\n                                                    true\n                                                );\n\n                                            if (\n                                                value &&\n                                                value === this.pluginSettings.get("original")\n                                            ) return;\n\n                                            if (!_Util__WEBPACK_IMPORTED_MODULE_8__.Util.validateUrl(value))\n                                                return betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                                                    "INVALID",\n                                                    "Please specify a valid URL.",\n                                                    { danger: true }\n                                                );\n\n                                            if (_optionalChain([channel, \'optionalAccess\', _8 => _8.id]) && value)\n                                                err = this.pluginSettings.writeImageUrl(\n                                                    channel.id,\n                                                    value \n                                                );\n\n                                            if (err) return console.error(err);\n\n                                            betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                                                "Success!",\n                                                React.createElement(\'div\', { className: _main_scss__WEBPACK_IMPORTED_MODULE_0__["default"].successAvatarImg,}, "Successfully established new avatar for DM channel with "\n\n                                                     , channel.rawRecipients[0].username, "! " , React.createElement(\'br\', null ), "(Change channels to apply it.)"\n\n                                                ),\n                                                {}\n                                            )\n\n                                        } catch (e) {\n                                            console.error(`[CAID]: Unknown error occurred. Please contact the plugin developer.\\nStack: ${e}`);\n                                        }\n                                    },\n                                    onCancel: () => console.log("Out of there!"),\n                                    cancelText: "Back",\n                                    confirmText: "Apply"\n                                }\n                            )\n                        }\n\n                    })\n                )\n            }\n        )\n    }\n\n     patchGuildContextMenu() {\n        const findWithDefault = (filter) =>\n            _zlibrary__WEBPACK_IMPORTED_MODULE_4__.WebpackModules.getModule((m) => m && _optionalChain([m, \'optionalAccess\', _9 => _9.default]) && filter(m.default));\n\n        const GuildContextMenu = findWithDefault(\n            (m) => _optionalChain([m, \'optionalAccess\', _10 => _10.displayName]) === "GuildContextMenu"\n        );\n\n        if (!GuildContextMenu) return;\n\n        _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Patcher.after(\n            GuildContextMenu,\n            "default",\n            (_, [props], ret) => {\n                const children = _zlibrary__WEBPACK_IMPORTED_MODULE_4__.Utilities.getNestedProp(ret, "props.children");\n                if (!Array.isArray(children)) return;\n\n                const { guild } = props;\n\n                const menu = _zlibrary__WEBPACK_IMPORTED_MODULE_4__.ContextMenu.buildMenuItem({\n                    label: "Set Avatar URL",\n                    action: () => {\n                        betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                            "Change Avatar",\n                            React.createElement(_components_Modal__WEBPACK_IMPORTED_MODULE_6__.Modal, {\n                                settings: this.pluginSettings,\n                                data: guild,\n                                type: "guild",}\n                            ),\n                            {\n                                onConfirm: () => {\n                                    try {\n                                        let err = null;\n                                        const val = this.pluginSettings.get("temporary");\n\n                                        if (typeof val === "boolean" && val === false)\n                                            return this.pluginSettings.writeImageUrl(\n                                                guild.id,\n                                                null,\n                                                true\n                                            );\n\n                                        if (val && val === this.pluginSettings.get("original"))\n                                            return;\n\n                                        if (\n                                            !val ||\n                                            (_optionalChain([val, \'optionalAccess\', _11 => _11.length]) &&\n                                                !_optionalChain([val, \'access\', _12 => _12.match, \'call\', _13 => _13(/\\.(jpg|jpeg|png|webp|svg|gif)/gi), \'optionalAccess\', _14 => _14.length]))\n                                        )\n                                            return betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                                                "INVALID",\n                                                "Please specify a valid URL!",\n                                                { danger: true }\n                                            );\n\n                                        if (_optionalChain([guild, \'optionalAccess\', _15 => _15.id]) && val)\n                                            err = this.pluginSettings.writeImageUrl(guild.id, val);\n\n                                        if (err) return console.error(err);\n\n                                        betterdiscord_api__WEBPACK_IMPORTED_MODULE_5___default().showConfirmationModal(\n                                            `Success!`,\n                                            React.createElement(\'div\', { className: _main_scss__WEBPACK_IMPORTED_MODULE_0__["default"].successAvatarImg,}, "Successfully established new avatar for "\n                                                     , guild.name, "!", " "\n                                                , React.createElement(\'br\', null ), "(Change channels to fully apply it.)"\n\n                                            ),\n                                            {}\n                                        );\n                                    } catch (e) {\n                                        console.error(\n                                            `Unknown error occurred. Please contact the plugin developer and report the issue.\\n\\n[STACK]: ${e.message}`\n                                        );\n                                    }\n                                },\n                                onCancel: () => console.log("Out of there!"),\n                                cancelText: "Back",\n                                confirmText: "Apply",\n                            }\n                        );\n                    },\n                });\n\n                children.splice(4, 0, menu);\n            }\n        )\n    }\n}\n\n//# sourceURL=webpack://LibraryPluginHack/./plugins/CAID/index.tsx?');
-			},
-			"../../../../usr/local/lib/node_modules/@betterdiscordbuilder/bdbuilder/node_modules/css-loader/dist/runtime/api.js": module => {
-				"use strict";
-				eval('\n\n/*\n  MIT License http://www.opensource.org/licenses/mit-license.php\n  Author Tobias Koppers @sokra\n*/\n// css base code, injected by the css-loader\n// eslint-disable-next-line func-names\nmodule.exports = function (cssWithMappingToString) {\n  var list = []; // return the list of modules as css string\n\n  list.toString = function toString() {\n    return this.map(function (item) {\n      var content = cssWithMappingToString(item);\n\n      if (item[2]) {\n        return "@media ".concat(item[2], " {").concat(content, "}");\n      }\n\n      return content;\n    }).join("");\n  }; // import a list of modules into the list\n  // eslint-disable-next-line func-names\n\n\n  list.i = function (modules, mediaQuery, dedupe) {\n    if (typeof modules === "string") {\n      // eslint-disable-next-line no-param-reassign\n      modules = [[null, modules, ""]];\n    }\n\n    var alreadyImportedModules = {};\n\n    if (dedupe) {\n      for (var i = 0; i < this.length; i++) {\n        // eslint-disable-next-line prefer-destructuring\n        var id = this[i][0];\n\n        if (id != null) {\n          alreadyImportedModules[id] = true;\n        }\n      }\n    }\n\n    for (var _i = 0; _i < modules.length; _i++) {\n      var item = [].concat(modules[_i]);\n\n      if (dedupe && alreadyImportedModules[item[0]]) {\n        // eslint-disable-next-line no-continue\n        continue;\n      }\n\n      if (mediaQuery) {\n        if (!item[2]) {\n          item[2] = mediaQuery;\n        } else {\n          item[2] = "".concat(mediaQuery, " and ").concat(item[2]);\n        }\n      }\n\n      list.push(item);\n    }\n  };\n\n  return list;\n};\n\n//# sourceURL=webpack://LibraryPluginHack/../../../../usr/local/lib/node_modules/@betterdiscordbuilder/bdbuilder/node_modules/css-loader/dist/runtime/api.js?');
-			},
-			fs: module => {
-				"use strict";
-				module.exports = require("fs");
-			},
-			path: module => {
-				"use strict";
-				module.exports = require("path");
-			},
-			"@zlibrary/plugin": module => {
-				"use strict";
-				module.exports = BasePlugin;
-			},
-			react: module => {
-				"use strict";
+			113: module => {
 				module.exports = BdApi.React;
-			},
-			"@zlibrary": module => {
-				"use strict";
-				module.exports = PluginApi;
-			},
-			styles: module => {
-				"use strict";
-				module.exports = StyleLoader;
-			},
-			"betterdiscord/api": module => {
-				"use strict";
-				module.exports = require("betterdiscord/bdapi");
-			},
-			"@discord/stores": module => {
-				"use strict";
-				module.exports = Modules["@discord/stores"];
 			}
 		};
 		var __webpack_module_cache__ = {};
@@ -370,7 +366,306 @@ function buildPlugin([BasePlugin, PluginApi]) {
 				});
 			};
 		})();
-		var __webpack_exports__ = __webpack_require__("./plugins/CAID/index.tsx");
+		var __webpack_exports__ = {};
+		(() => {
+			__webpack_require__.r(__webpack_exports__);
+			__webpack_require__.d(__webpack_exports__, {
+				default: () => CAIDInjector
+			});
+			var main = __webpack_require__(666);
+			const external_StyleLoader_namespaceObject = StyleLoader;
+			var external_StyleLoader_default = __webpack_require__.n(external_StyleLoader_namespaceObject);
+			const external_BasePlugin_namespaceObject = BasePlugin;
+			var external_BasePlugin_default = __webpack_require__.n(external_BasePlugin_namespaceObject);
+			const stores_namespaceObject = Modules["@discord/stores"];
+			const external_PluginApi_namespaceObject = PluginApi;
+			const bdapi_namespaceObject = require("betterdiscord/bdapi");
+			var bdapi_default = __webpack_require__.n(bdapi_namespaceObject);
+			const external_path_namespaceObject = require("path");
+			const external_fs_namespaceObject = require("fs");
+			function _defineProperty(obj, key, value) {
+				if (key in obj) Object.defineProperty(obj, key, {
+					value,
+					enumerable: true,
+					configurable: true,
+					writable: true
+				});
+				else obj[key] = value;
+				return obj;
+			}
+			class Settings {
+				constructor() {
+					_defineProperty(this, "settings", void 0);
+					this.settings = {};
+					this.set();
+					this.load();
+				}
+				alter(property, value = null, subValue = null) {
+					if (null == value) return;
+					if (!this.isPresent(property, subValue)) null != subValue ? this.settings[property][subValue] = value : this.settings[property] = value;
+				}
+				get(property, subValue = null) {
+					try {
+						return null != subValue ? this.settings[property][subValue] : this.settings[property];
+					} catch {
+						return null;
+					}
+				}
+				writeImageUrl(id, imageUrl, deleteEntry = false) {
+					if (!id) return new Error("'id' value not provided!");
+					try {
+						if (!Object.keys(this.get("guilds")).length) this.alter("guilds", {});
+						if (this.get("guilds")[id] && deleteEntry || null == imageUrl) {
+							delete this.get("guilds")[id];
+							this.alter("guilds", this.get("guilds") || {});
+							return (0, external_fs_namespaceObject.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));
+						}
+						Object.keys(this.get("guilds") || {}).length ? this.alter("guilds", imageUrl, id) : this.alter("guilds", {
+							[id]: imageUrl
+						});
+						(0, external_fs_namespaceObject.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));
+					} catch (e) {
+						return e;
+					}
+				}
+				writeDisableConfig(type, disabled) {
+					if (!type || "string" != typeof type || !["guild", "dm"].some((t => type.toLowerCase() == t))) return console.error("[CAID_CONFIG]: Invalid value for 'disabled'! Must be 'guild' or 'dm'!");
+					this.alter(`${type}Disabled`, disabled);
+					(0, external_fs_namespaceObject.writeFileSync)(this.get("path"), JSON.stringify(this.settings, null, 2));
+				}
+				findConfig(pluginsPath = bdapi_default().Plugins.folder) {
+					let found = null;
+					try {
+						const results = (0, external_fs_namespaceObject.readdirSync)(pluginsPath);
+						for (const result of results) {
+							if (null != found) break;
+							const stat = (0, external_fs_namespaceObject.statSync)(external_path_namespaceObject.join(pluginsPath, result));
+							if (stat.isDirectory()) {
+								this.findConfig(external_path_namespaceObject.join(pluginsPath, result));
+								continue;
+							} else if (result.match(/caid\s?\.config\s?\.json/gi)?.length) found = external_path_namespaceObject.join(pluginsPath, result);
+						}
+					} catch {
+						console.error("Unable to find configuration file.");
+					}
+					return found;
+				}
+				load() {
+					const home = bdapi_default().Plugins.folder;
+					this.alter("path", this.findConfig(home));
+					if (null == this.get("path")) return;
+					delete window.require.cache[window.require.resolve(this.get("path"))];
+					this.alter("guilds", this.get("guilds") || {});
+					const watcher = (0, external_fs_namespaceObject.watch)(this.get("path"));
+					watcher.on("change", (() => {
+						this.alter("guilds", {});
+						delete window.require.cache[window.require.resolve(this.get("path"))];
+						const options = window.require(this.get("path"));
+						this.alter("guilds", options?.guilds || {});
+						this.alter("guildDisabled", options?.guildDisabled || false);
+						this.alter("dmDisabled", options?.dmDisabled || false);
+					}));
+					const data = window.require(this.get("path"));
+					this.alter("guildDisabled", data.guildDisabled);
+					this.alter("dmDisabled", data.dmDisabled);
+					this.alter("guilds", data.guilds);
+				}
+				set() {
+					this.alter("path", this.findConfig());
+					this.alter("original", stores_namespaceObject.Users.getCurrentUser().getAvatarURL());
+					this.load();
+				}
+				isPresent(property, subValue = null) {
+					for (const entry in this.settings) try {
+						return Boolean(null != subValue ? entry?.[property]?.[subValue] : entry?.[property]);
+					} catch {}
+					return false;
+				}
+			}
+			var React = __webpack_require__(113);
+			const Modal = ({
+				data,
+				type,
+				settings
+			}) => {
+				if (!(settings instanceof Settings)) return console.error(new Error("'settings' property must of type 'PluginSettings'!"));
+				if (!["dm", "guild"].some((t => type.toLowerCase() == t))) return console.error("'type' property must be either 'guild' or 'dm'!");
+				const dmDisabled = settings.get("dmDisabled");
+				const guildDisabled = settings.get("guildDisabled");
+				const [{
+					url,
+					disabled,
+					timeout
+				}, setProps] = React.useState({
+					url: "",
+					disabled: type && "dm" === type.toLowerCase() ? dmDisabled : guildDisabled,
+					timeout: null
+				});
+				return React.createElement("div", {
+					className: "AvatarPanel",
+					children: [external_PluginApi_namespaceObject.ReactTools.createWrappedElement(new external_PluginApi_namespaceObject.Settings.Textbox("", disabled || !url ? null : React.createElement("a", {
+						onClick: () => {
+							bdapi_default().findModuleByProps("closeModal").closeModal(settings.get(`${type}Disabled`));
+							return settings.writeImageUrl(data.id, null, true);
+						},
+						className: "reset-avatar"
+					}, "Reset Avatar"), url, (value => {
+						settings.alter("temporary", value);
+						clearTimeout(timeout);
+						setProps({
+							timeout: setTimeout((() => setProps({
+								url: value,
+								disabled,
+								timeout: null
+							})), 1e3),
+							url,
+							disabled
+						});
+					}), {
+						placeholder: "Enter URL",
+						disabled
+					}).getElement()), !url ? null : React.createElement("img", {
+						src: url,
+						className: main.Z.AvatarImg
+					}), url ? null : external_PluginApi_namespaceObject.ReactTools.createWrappedElement(new external_PluginApi_namespaceObject.Settings.Switch("Disabled", "", disabled, (_disabled => {
+						setProps({
+							url,
+							disabled: _disabled,
+							timeout
+						});
+						settings.alter("temporary", settings.get("original"));
+						settings.alter(`${type}Disabled`, _disabled);
+						if (!_disabled) settings.writeImageUrl(data.id, settings.get("guilds")[data.id], false);
+						settings.writeDisableConfig(type, _disabled);
+					})).getElement())]
+				});
+			};
+			var Util_React = __webpack_require__(113);
+			class Util {
+				static validateUrl(imageUrl) {
+					return imageUrl && "string" === typeof imageUrl && !!imageUrl.match(/\.(jpg|jpeg|png|webp|svg|gif)/gi)?.length;
+				}
+				static constructImg(imageUrl) {
+					if (!imageUrl) return;
+					if (!this.validateUrl(imageUrl)) return Util_React.createElement("p", {
+						className: main.Z.InvalidUrl
+					}, "Invalid URL!");
+					return Util_React.createElement("img", {
+						src: imageUrl,
+						className: main.Z.AvatarImg
+					});
+				}
+			}
+			var CAID_React = __webpack_require__(113);
+			function CAID_defineProperty(obj, key, value) {
+				if (key in obj) Object.defineProperty(obj, key, {
+					value,
+					enumerable: true,
+					configurable: true,
+					writable: true
+				});
+				else obj[key] = value;
+				return obj;
+			}
+			class CAIDInjector extends(external_BasePlugin_default()) {
+				constructor(...args) {
+					super(...args);
+					CAID_defineProperty(this, "pluginSettings", void 0);
+					CAID_defineProperty(this, "settings", void 0);
+					CAID_defineProperty(this, "guilds", void 0);
+					CAID_defineProperty(this, "id", void 0);
+				}
+				async onStart() {
+					this.guilds = {};
+					external_StyleLoader_default().inject();
+					try {
+						this.pluginSettings = new Settings;
+						this.settings = this.pluginSettings.settings;
+						this.id = stores_namespaceObject.Users.getCurrentUser().id;
+						if (!this.id) {
+							console.error("[CAID]: Unable to fetch current user ID, this should not happen.\nEXITING.");
+							return;
+						}
+						setTimeout((() => {
+							this.patchAvatarUrl();
+							this.patchGuildContextMenu();
+						}), 1e3);
+					} catch (e) {
+						console.error(e);
+					}
+				}
+				onStop() {
+					return this.stop();
+				}
+				stop() {
+					console.log("[CAID]: Exiting...");
+					external_StyleLoader_default().remove();
+					external_PluginApi_namespaceObject.Patcher.unpatchAll();
+					bdapi_default().saveData("CAID", "temporary", null);
+					console.log("[CAID]: Successfully exited.");
+				}
+				onSwitch() {
+					this.pluginSettings.alter("guilds", this.pluginSettings.get("guilds") || {});
+				}
+				patchAvatarUrl() {
+					const Avatar = bdapi_default().findModuleByProps("getUserAvatarURL");
+					external_PluginApi_namespaceObject.Patcher.after(Avatar.default, "getUserAvatarURL", ((_this, props) => {
+						const locationId = window.location.href.includes("@me") ? window.location.href.split("/@me/")[1] : window.location.href.split("/").filter((x => x))[3];
+						const type = window.location.href.includes("@me") ? "dm" : "guild";
+						if (type && this.pluginSettings.get(`${type}Disabled`)) return this.pluginSettings.get("original");
+						if (props[0].id !== this.id) return;
+						return this.pluginSettings.get("guilds")?.[locationId];
+					}));
+				}
+				patchGuildContextMenu() {
+					if (window.location.href.includes("@me")) return;
+					const GuildContextMenu = (filter => external_PluginApi_namespaceObject.WebpackModules.getModule((m => m && m?.default && filter(m.default))))((m => "GuildContextMenu" === m?.displayName));
+					if (!GuildContextMenu) return void setTimeout((() => {
+						this.patchGuildContextMenu();
+					}), 1e3);
+					external_PluginApi_namespaceObject.Patcher.after(GuildContextMenu, "default", ((_, [props], ret) => {
+						const children = external_PluginApi_namespaceObject.Utilities.getNestedProp(ret, "props.children");
+						if (!Array.isArray(children)) return;
+						const {
+							guild
+						} = props;
+						const menu = external_PluginApi_namespaceObject.ContextMenu.buildMenuItem({
+							label: "Set Avatar URL",
+							action: () => {
+								bdapi_default().showConfirmationModal("Change Avatar", CAID_React.createElement(Modal, {
+									settings: this.pluginSettings,
+									data: guild,
+									type: "guild"
+								}), {
+									onConfirm: () => {
+										try {
+											let err = null;
+											const val = this.pluginSettings.get("temporary");
+											if (!val) return this.pluginSettings.writeImageUrl(guild.id, null, true);
+											if (val && val === this.pluginSettings.get("original")) return;
+											if (!Util.validateUrl(val)) return bdapi_default().showConfirmationModal("INVALID", "Please specify a valid URL!", {
+												danger: true
+											});
+											if (guild?.id && val) err = this.pluginSettings.writeImageUrl(guild.id, val);
+											if (err) return console.error(err);
+											bdapi_default().showConfirmationModal(`Success!`, CAID_React.createElement("div", {
+												className: main.Z.successAvatarImg
+											}, "Successfully established new avatar for ", guild.name, "!", " ", CAID_React.createElement("br", null), "(Change channels to fully apply it.)"), {});
+										} catch (e) {
+											console.error(`Unknown error occurred. Please contact the plugin developer and report the issue.\n\n[STACK]: ${e.message}`);
+										}
+									},
+									onCancel: () => console.log("Out of there!"),
+									cancelText: "Back",
+									confirmText: "Apply"
+								});
+							}
+						});
+						children.splice(4, 0, menu);
+					}));
+				}
+			}
+		})();
 		module.exports.LibraryPluginHack = __webpack_exports__;
 	})();
 	const PluginExports = module.exports.LibraryPluginHack;
