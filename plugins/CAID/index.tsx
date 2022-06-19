@@ -80,8 +80,8 @@ export default class CAIDInjector extends BasePlugin {
 
                 const type = window.location.href.includes("@me") ? "dm" : "guild";
 
-                if (type && this.pluginSettings.get<boolean>(`${type}Disabled`)) return this.pluginSettings.get<string>("original");
                 if (props[0].id !== this.id) return;
+                if (type && this.pluginSettings.get<boolean>(`${type}Disabled`)) return this.pluginSettings.get<string>("original");
 
                 return this.pluginSettings.get<CAID>("guilds")?.[locationId];
             }

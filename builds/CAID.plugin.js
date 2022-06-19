@@ -612,8 +612,8 @@ function buildPlugin([BasePlugin, PluginApi]) {
 					external_PluginApi_namespaceObject.Patcher.after(Avatar.default, "getUserAvatarURL", ((_this, props) => {
 						const locationId = window.location.href.includes("@me") ? window.location.href.split("/@me/")[1] : window.location.href.split("/").filter((x => x))[3];
 						const type = window.location.href.includes("@me") ? "dm" : "guild";
-						if (type && this.pluginSettings.get(`${type}Disabled`)) return this.pluginSettings.get("original");
 						if (props[0].id !== this.id) return;
+						if (type && this.pluginSettings.get(`${type}Disabled`)) return this.pluginSettings.get("original");
 						return this.pluginSettings.get("guilds")?.[locationId];
 					}));
 				}

@@ -17,7 +17,8 @@
             "items": [
                 "Would show invalid URL even when user didn't place any input",
                 "Create accommodating forms for various scenarios",
-                "BROKEN: DM injections; needs fixing"
+                "BROKEN: DM injections; needs fixing",
+                "FIX: Guild Patcher — overwriting all user's avatars instead of current user's upon disabling"
             ] 
         }
     ],
